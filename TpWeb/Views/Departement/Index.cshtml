@@ -1,0 +1,58 @@
+﻿@using GestionCegepWeb.Models
+@model CegepDTO
+@{
+    
+}
+
+@*Si erreur du côté serveur... affichage du message d'erreur...*@
+@if(ViewBag.MessageErreur != null)
+{
+   <br>
+    <h2 class="alert-danger">@ViewBag.MessageErreur</h2> 
+}else
+{
+    
+    @*Affichage de la liste des département..*@
+    <br>
+    <form asp-controller="Departement" asp-action="Index" method="get">
+        <select onchange="submit();" asp-for="Nom" name="nomCegep">
+    @*<option value="">Choississez un Cégep</option>*@
+       @foreach(CegepDTO unCegep in ViewBag.ListeCegeps)
+            {
+                if(@ViewBag.nomCegepChoix.Equals(unCegep.Nom))
+                {
+                    <option  value="@unCegep.Nom" selected>@unCegep.Nom</option>
+                }
+                else
+                {
+                    <option  value="@unCegep.Nom">@unCegep.Nom</option>
+                }
+                
+            }
+        </select>
+    </form>
+    <br />
+    <h1>@ViewBag.titre</h1>
+    <br />
+    <h3>Liste des Département(s) (@ViewBag.ListeDepartement.Length Département(s)) :</h3>
+    <br>
+    
+   
+        
+            
+    
+    <table class="table table-bordered table-striped">
+        <tbody><tr>
+            <th>No</th>
+            <th>Nom</th>
+            <th>Description</th>
+          
+        </tr>@foreach (DepartementDTO departement in ViewBag.ListeDepartement)
+        {<tr>
+                <td>@departement.No</td>
+                <td>@departement.Nom</td>
+                <td>@departement.Description</td>
+                
+            </tr>}</tbody></table>
+}
+
