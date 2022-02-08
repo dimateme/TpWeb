@@ -30,6 +30,7 @@ namespace TpWeb.Controllers
                 ViewBag.ListeCegeps = CegepControleur.Instance.ObtenirListeCegep().ToArray();
                 ViewBag.ListeDepartement = CegepControleur.Instance.ObtenirListeDepartement(nomCegep).ToArray();
 
+
             }
             catch (Exception e)
             {
