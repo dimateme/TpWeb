@@ -11,14 +11,21 @@ namespace TpWeb.Controllers
 {
     public class DepartementController : Controller
     {
-        
+
+        /// <summary>
+        /// Méthode de service appelé lors de l'action Index.
+        /// Rôles de l'action : 
+        ///   -Afficher la liste des Départements.
+        /// </summary>
+        /// <returns>ActionResult suite aux traitements des données.</returns>
         [Route("Departement")]
         [Route("Departement/Index")]
         [HttpGet]
        
         public IActionResult Index([FromQuery] string nomCegep)
         {
-            if(nomCegep == null)
+            //Préparation des données pour la vue...
+            if (nomCegep == null)
             {
                 nomCegep = CegepControleur.Instance.ObtenirListeCegep()[0].Nom;
             }
@@ -41,39 +48,9 @@ namespace TpWeb.Controllers
 
 
 
-
+            //retoune la vue
             return View();
         }
-        //[HttpGet]
-        //public IActionResult Index([FromQuery] string nomCegep)
-        //{
-
-
-        //    try
-        //    {
-
-
-                
-        //        ViewBag.ListeDepartement = CegepControleur.Instance.ObtenirListeDepartement(nomCegep).ToArray();
-
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        ViewBag.MessageErreur = e.Message;
-        //        //ViewBag.AfficherResulat = ViewBag.MessageErreur;
-        //    }
-
-
-        //    return View();
-        //}
-
-        //[Route("Departement/AfficherDepartement")]
-        //[HttpGet]
-        //public IActionResult AfficherDepartement()
-        //{
-        //    ViewBag.ListeCegeps = CegepControleur.Instance.ObtenirListeCegep();
-        //    //ViewBag.ListeDepartement = CegepControleur.Instance.ObtenirListeDepartement(nomCegep);
-        //    return View("Index");
-        //}
+        
     }
 }

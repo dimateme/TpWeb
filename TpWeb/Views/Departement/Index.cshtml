@@ -12,7 +12,7 @@
 }else
 {
     
-    @*Affichage de la liste des département..*@
+    @*Affichage de la liste des des Cégeps..*@
     <br>
     <form asp-controller="Departement" asp-action="Index" method="get">
         <select onchange="submit();" asp-for="Nom" name="nomCegep">
@@ -47,7 +47,9 @@
             <th>Nom</th>
             <th>Description</th>
           
-        </tr>@foreach (DepartementDTO departement in ViewBag.ListeDepartement)
+        </tr>
+        @*Affichage de la liste des Départements..*@
+        @foreach (DepartementDTO departement in ViewBag.ListeDepartement)
         {<tr>
                 <td>@departement.No</td>
                 <td>@departement.Nom</td>

@@ -10,9 +10,9 @@
 }else
 {
     
-    @*Affichage de la liste des Cégeps..*@
+    @*Affichage de la liste des Cegeps..*@
     <br>
-    <form asp-controller="Enseignant" asp-action="Index" method="get">
+    <form asp-controller="Cours" asp-action="Index" method="get">
         <select onchange="submit();"  name="nomCegep">
     @*<option value="">Choississez un Cégep</option>*@
        @foreach(CegepDTO unCegep in ViewBag.ListeCegeps)
@@ -50,40 +50,24 @@
     <br />
     <h1>@ViewBag.titre</h1>
     <br />
-    <h3>Liste des Enseignant(s) (@ViewBag.ListeEnseignant.Length Enseignant(s)) :</h3>
+    @*Affichage de la liste des Cours..*@
+    <h3>Liste des Cour(s) (@ViewBag.ListeCourts.Length Cour(s)) :</h3>
     <br>
     <table class="table table-bordered table-striped">
         <tbody><tr>
             <th>No</th>
             <th>Nom</th>
-            <th>Prénom</th>
-            <th>Adresse</th>
-            <th>Ville</th>
-            <th>Province</th>
-            <th>Code postal</th>
-            <th>Téléphone</th>
-            <th>Couriel</th>
+            <th>Déscription</th>
           
         </tr>
-        @*Affichage de la liste des enseignants..*@
-        @foreach (EnseignantDTO enseignant in ViewBag.ListeEnseignant)
+        @foreach (CoursDTO cour in ViewBag.ListeCourts)
         {<tr>
-                <td>@enseignant.NoEmploye</td>
-                <td>@enseignant.Nom</td>
-                <td>@enseignant.Prenom</td>
-                <td>@enseignant.Adresse</td>
-                <td>@enseignant.Ville</td>
-                <td>@enseignant.Province</td>
-                <td>@enseignant.CodePostal</td>
-                <td>@enseignant.Telephone</td>
-                <td>@enseignant.Courriel</td>
-                
+                <td>@cour.No</td>
+                <td>@cour.Nom</td>
+                <td>@cour.Description</td>
             </tr>}</tbody></table>
-   
-        
-            
-    
-    
+     
 }
+
 
 
