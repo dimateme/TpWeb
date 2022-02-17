@@ -1,5 +1,5 @@
 ﻿@using GestionCegepWeb.Models
-@model CegepDTO
+@model DepartementDTO
 @{
     
 }
@@ -15,7 +15,7 @@
     @*Affichage de la liste des des Cégeps..*@
     <br>
     <form asp-controller="Departement" asp-action="Index" method="get">
-        <select onchange="submit();" asp-for="Nom" name="nomCegep">
+        <select onchange="submit();"  name="nomCegep">
     @*<option value="">Choississez un Cégep</option>*@
        @foreach(CegepDTO unCegep in ViewBag.ListeCegeps)
             {
@@ -56,5 +56,33 @@
                 <td>@departement.Description</td>
                 
             </tr>}</tbody></table>
+
+        <br />
+
+     <form asp-controller="Departement" asp-action="AjouterDepartement" method="post">
+
+    <div class="form-group">
+        <label asp-for ="No"></label>
+        <input asp-for ="No"   class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Nom" ></label>
+        <input asp-for="Nom"  class="form-control">
+    </div>
+
+    
+    <div class="form-group">
+        <label asp-for="Description" ></label>
+        <input asp-for="Description" class="form-control">
+    </div>
+   
+
+    <input type="hidden"  name="nomCegep" value="@ViewBag.nomCegepChoix" />
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+    
+    
+</form>
 }
 

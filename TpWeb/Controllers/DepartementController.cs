@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using GestionCegepWeb.Models;
 
 namespace TpWeb.Controllers
 {
@@ -51,6 +52,39 @@ namespace TpWeb.Controllers
             //retoune la vue
             return View();
         }
+
         
+        [Route("Departement/AjouterDepartement")]
+        [HttpPost]
+
+        public IActionResult AjouterDepartement([FromForm] DepartementDTO departementDTO ,[FromForm] string nomCegep)
+        {
+            //Préparation des données pour la vue...
+            if (departementDTO != null && nomCegep!=null)
+            {
+                try
+                {
+
+
+                    CegepControleur.Instance.AjouterDepartement(nomCegep, departementDTO);
+
+                }
+                catch (Exception e)
+                {
+                    ViewBag.MessageErreur = e.Message;
+
+                }
+            }
+
+            
+
+
+
+
+            
+            return RedirectToAction("Index", "Departement", new {nomCegep=nomCegep});
+        }
+
+
     }
 }

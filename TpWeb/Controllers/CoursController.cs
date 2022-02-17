@@ -1,6 +1,8 @@
 ﻿using GestionCegepWeb.Logics.Controleurs;
+using GestionCegepWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace TpWeb.Controllers
 {
@@ -39,12 +41,25 @@ namespace TpWeb.Controllers
             {
                 if (ex.Message == "Erreur lors de l'obtention d'un département par son nom et son cégep...")
                 {
-                    nomDepartement = CegepControleur.Instance.ObtenirListeDepartement(nomCegep)[0].Nom;
-                    ViewBag.nomCegepChoix = nomCegep;
-                    ViewBag.nomDepartementChoix = nomDepartement;
-                    ViewBag.ListeCegeps = CegepControleur.Instance.ObtenirListeCegep().ToArray();
-                    ViewBag.ListDepartements = CegepControleur.Instance.ObtenirListeDepartement(nomCegep).ToArray();
-                    ViewBag.ListeCourts = CegepControleur.Instance.ObtenirListeCours(nomCegep, nomDepartement).ToArray();
+
+                    if (CegepControleur.Instance.ObtenirListeDepartement(nomCegep).Count > 0)
+                    {
+                        nomDepartement = CegepControleur.Instance.ObtenirListeDepartement(nomCegep)[0].Nom;
+                        ViewBag.nomCegepChoix = nomCegep;
+                        ViewBag.nomDepartementChoix = nomDepartement;
+                        ViewBag.ListeCegeps = CegepControleur.Instance.ObtenirListeCegep().ToArray();
+                        ViewBag.ListDepartements = CegepControleur.Instance.ObtenirListeDepartement(nomCegep).ToArray();
+                        ViewBag.ListeCourts = CegepControleur.Instance.ObtenirListeCours(nomCegep, nomDepartement).ToArray();
+                    }
+                    else
+                    {
+                        nomDepartement = "";
+                        ViewBag.nomDepartementChoix = nomDepartement;
+                        ViewBag.ListeCegeps = CegepControleur.Instance.ObtenirListeCegep().ToArray();
+                        ViewBag.ListDepartements = new List<DepartementDTO>().ToArray();
+                        ViewBag.ListeCourts = new List<CoursDTO>().ToArray();
+                    }
+                    
                 } else
                 {
                     ViewBag.MessageErreur = ex.Message;
@@ -54,6 +69,22 @@ namespace TpWeb.Controllers
             }
             //retourne la vue
             return View();
+        }
+        [Route("Cours/AjouterCours")]
+        [HttpPost]
+        public IActionResult AjouterCours([FromForm]string nomCegep, [FromForm] string nomDepartement,
+            [FromForm] CoursDTO unCoursDTO)
+        {
+            try
+            {
+                CegepControleur.Instance.AjouterCours(nomCegep, nomDepartement, unCoursDTO);
+            }
+            catch (Exception e)
+            {
+
+                ViewBag.MessageErreur = e.Message;
+            }
+            return RedirectToAction("Index", "Cours", new { nomCegep = nomCegep, nomDepartement = nomDepartement });
         }
     }
 }

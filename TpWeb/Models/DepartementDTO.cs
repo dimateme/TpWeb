@@ -15,20 +15,25 @@ namespace GestionCegepWeb.Models
         /// <summary>
         /// Propriété représentant le numéro du département.
         /// </summary>
-        public string No { get; private set; }
+        public string No { get;  set; }
         /// <summary>
         /// Propriété représentant le nom du département.
         /// </summary>
-        public string Nom { get; private set; }
+        public string Nom { get;  set; }
         /// <summary>
         /// 
         /// </summary>
-        public string Description { get; private set; }
+        public string Description { get;  set; }
 
         #endregion Proprietes
 
         #region Constructeurs
-
+        public DepartementDTO()
+        {
+            No = "";
+            Nom = "";
+            Description = "";
+        }
         /// <summary>
         /// Constructeur avec paramètres.
         /// </summary>

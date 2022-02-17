@@ -1,4 +1,5 @@
 ﻿@using GestionCegepWeb.Models
+@model CoursDTO
 
 
 
@@ -65,7 +66,37 @@
                 <td>@cour.No</td>
                 <td>@cour.Nom</td>
                 <td>@cour.Description</td>
-            </tr>}</tbody></table>
+        </tr>}
+            
+        </tbody>
+        </table>
+        <br />
+        <form asp-controller="Cours" asp-action="AjouterCours" method="post">
+
+    <div class="form-group">
+        <label asp-for ="No"></label>
+        <input asp-for ="No"   class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Nom" ></label>
+        <input asp-for="Nom"  class="form-control">
+    </div>
+
+    
+    <div class="form-group">
+        <label asp-for="Description" ></label>
+        <input asp-for="Description" class="form-control">
+    </div>
+   
+
+    <input type="hidden"  name="nomCegep" value="@ViewBag.nomCegepChoix" />
+    <input type="hidden"  name="nomDepartement" value="@ViewBag.nomDepartementChoix" />
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+    
+    
+</form>
      
 }
 

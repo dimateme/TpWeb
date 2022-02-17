@@ -1,4 +1,5 @@
 ﻿using GestionCegepWeb.Logics.Controleurs;
+using GestionCegepWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -39,7 +40,27 @@ namespace TpWeb.Controllers
             //Retour de la vue...
             return View();
         }
+        [Route("Cegep/AjouterCegep")]
+        [HttpPost]
+        public IActionResult AjouterCegep([FromForm] CegepDTO cegepDTO)
+        {
+            
+            if (cegepDTO != null)
+            {
+                try
+                {
+                    
+                     CegepControleur.Instance.AjouterCegep(cegepDTO);
+                }
+                catch (Exception e)
+                {
+                    ViewBag.MessageErreur = e.Message;
+                }
 
+            }
+            //Retour de la vue...
+            return RedirectToAction("Index","Cegep", cegepDTO);
+        }
 
 
 

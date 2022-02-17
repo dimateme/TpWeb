@@ -14,19 +14,25 @@ namespace GestionCegepWeb.Models
         /// <summary>
         /// Propriété représentant le no du cours.
         /// </summary>
-        public string No { get; private set; }
+        public string No { get; set; }
         /// <summary>
         /// Propriété représentant le nom du cours.
         /// </summary>
-        public string Nom { get; private set; }
+        public string Nom { get; set; }
         /// <summary>
         /// Propriété représentant la description du cours.
         /// </summary>
-        public string Description { get; private set; }
+        public string Description { get;  set; }
 
         #endregion Proprietes
 
         #region Constructeurs
+        public CoursDTO()
+        {
+            No = "";
+            Nom = "";
+            Description = "";
+        }
 
         /// <summary>
         /// Constructeur avec paramètres.

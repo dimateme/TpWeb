@@ -1,6 +1,5 @@
 ﻿@using GestionCegepWeb.Models
-
-
+@model EnseignantDTO
 
 @*Si erreur du côté serveur... affichage du message d'erreur...*@
 @if(ViewBag.MessageErreur != null)
@@ -79,6 +78,53 @@
                 <td>@enseignant.Courriel</td>
                 
             </tr>}</tbody></table>
+            <br />
+
+             <form asp-controller="Enseignant" asp-action="AjouterEnseignant" method="post">
+
+    <div class="form-group">
+        <label asp-for ="NoEmploye"></label>
+        <input asp-for ="NoEmploye"   class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Nom" ></label>
+        <input asp-for="Nom"  class="form-control">
+    </div>
+
+    
+    <div class="form-group">
+        <label asp-for="Prenom" ></label>
+        <input asp-for="Prenom" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Adresse" ></label>
+        <input asp-for="Adresse" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Ville" ></label>
+        <input asp-for="Ville"  class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Province" ></label>
+        <input asp-for="Province"  class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="CodePostal" ></label>
+        <input asp-for="CodePostal"  class="form-control">
+    </div>
+     <div class="form-group">
+        <label asp-for="Courriel" ></label>
+        <input asp-for="Courriel"  class="form-control">
+    </div>
+
+    <input type="hidden"  name="nomCegep" value="@ViewBag.nomCegepChoix" />
+    <input type="hidden"  name="nomDepartement" value="@ViewBag.nomDepartementChoix" />
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+    
+    
+</form>
    
         
             

@@ -15,49 +15,61 @@ namespace GestionCegepWeb.Models
         /// <summary>
         /// No de l'enseignant.
         /// </summary>
-        public int NoEmploye { get; private set; }
+        public int NoEmploye { get;  set; }
         /// <summary>
         /// Nom de l'enseignant.
         /// </summary>
-        public string Nom { get; private set; }
+        public string Nom { get;  set; }
         /// <summary>
         /// Prénom de l'enseignant.
         /// </summary>
-        public string Prenom { get; private set; }
+        public string Prenom { get;  set; }
         /// <summary>
         /// Adresse de l'enseignant.
         /// </summary>
-        public string Adresse { get; private set; }
+        public string Adresse { get; set; }
         /// <summary>
         /// Ville de l'enseignant.
         /// </summary>
-        public string Ville { get; private set; }
+        public string Ville { get;  set; }
         /// <summary>
         /// Province de l'enseignant.
         /// </summary>
-        public string Province { get; private set; }
+        public string Province { get;  set; }
         /// <summary>
         /// Code postal de l'enseignant.
         /// </summary>
-        public string CodePostal { get; private set; }
+        public string CodePostal { get;  set; }
         /// <summary>
         /// Telephone de l'enseignant.
         /// </summary>
-        public string Telephone { get; private set; }
+        public string Telephone { get;  set; }
         /// <summary>
         /// Courriel de l'enseignant.
         /// </summary>
-        public string Courriel { get; private set; }
+        public string Courriel { get;  set; }
         /// <summary>
         /// Date d'embauche de l'enseignant.
         /// </summary>
-        public string DateEmbauche { get; private set; }
+        public string DateEmbauche { get;  set; }
         /// <summary>
         /// Date d'arrêt de l'enseignant.
         /// </summary>
-        public string DateArret { get; private set; }
+        public string DateArret { get;  set; }
 
         #endregion Proprietes
+        public EnseignantDTO()
+        {
+            NoEmploye = 0;
+            Nom = "";
+            Prenom = "";
+            Adresse = "";
+            Ville = "";
+            Province = "";
+            CodePostal = "";
+            Telephone = "";
+            Courriel = "";
+        }
 
         #region Constructeurs
 
