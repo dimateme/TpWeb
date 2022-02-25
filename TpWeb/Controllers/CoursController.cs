@@ -67,9 +67,16 @@ namespace TpWeb.Controllers
 
                 
             }
-            //retourne la vue
+           
             return View();
         }
+        /// <summary>
+        /// Méthode service qui permet d'ajouter un Cours
+        /// </summary>
+        /// <param name="nomCegep"></param>
+        /// <param name="nomDepartement"></param>
+        /// <param name="unCoursDTO"></param>
+        /// <returns></returns>
         [Route("Cours/AjouterCours")]
         [HttpPost]
         public IActionResult AjouterCours([FromForm]string nomCegep, [FromForm] string nomDepartement,
@@ -83,6 +90,55 @@ namespace TpWeb.Controllers
             {
 
                 ViewBag.MessageErreur = e.Message;
+            }
+            return RedirectToAction("Index", "Cours", new { nomCegep = nomCegep, nomDepartement = nomDepartement });
+        }
+        /// <summary>
+        /// Méthode service qui permet d'afficher les informations d' un Cours dans un formulaire
+        /// </summary>
+        /// <param name="nomCegep"></param>
+        /// <param name="nomDepartement"></param>
+        /// <param name="nomCours"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Cours/FormulaireModifierCours")]
+        public IActionResult FormulaireModifierCours([FromQuery] string nomCegep, [FromQuery] string nomDepartement, [FromQuery] string nomCours)
+        {
+            CoursDTO coursDTO;
+            ViewBag.nomCegepChoix = nomCegep;
+            ViewBag.nomDepartementChoix = nomDepartement;
+            if (nomCegep !=null && nomDepartement !=null && nomCours!=null)
+            {
+                
+                coursDTO = CegepControleur.Instance.ObtenirCours(nomCegep, nomDepartement, nomCours);
+                return View(coursDTO);
+            }else
+            {
+                coursDTO = null;
+                return View(coursDTO);
+            }
+        }
+        /// <summary>
+        /// Méthode service qui permet de modifier un Cours
+        /// </summary>
+        /// <param name="nomCegep"></param>
+        /// <param name="nomDepartement"></param>
+        /// <param name="coursDTO"></param>
+        /// <returns></returns>
+        [Route("Cours/ModifierCours")]
+        [HttpPost]
+        public IActionResult ModifierCours([FromForm] string nomCegep, [FromForm] string nomDepartement, [FromForm] CoursDTO coursDTO)
+        {
+            try
+            {
+                ViewBag.nomCegepChoix = nomCegep;
+                ViewBag.nomDepartementChoix = nomDepartement;
+                CegepControleur.Instance.ModifierCours(nomCegep, nomDepartement, coursDTO);
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("FormulaireModifierCours", "Cours", new { nomCegep = nomCegep, nomDepartement = nomDepartement, nomCours = coursDTO.Nom });
             }
             return RedirectToAction("Index", "Cours", new { nomCegep = nomCegep, nomDepartement = nomDepartement });
         }

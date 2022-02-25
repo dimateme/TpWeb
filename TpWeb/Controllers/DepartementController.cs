@@ -12,7 +12,7 @@ namespace TpWeb.Controllers
 {
     public class DepartementController : Controller
     {
-
+        //CegepDTO lecegep;
         /// <summary>
         /// Méthode de service appelé lors de l'action Index.
         /// Rôles de l'action : 
@@ -53,7 +53,12 @@ namespace TpWeb.Controllers
             return View();
         }
 
-        
+        /// <summary>
+        /// Méthode service qui permet d'ajoutyer un Département
+        /// </summary>
+        /// <param name="departementDTO"></param>
+        /// <param name="nomCegep"></param>
+        /// <returns></returns>
         [Route("Departement/AjouterDepartement")]
         [HttpPost]
 
@@ -65,9 +70,7 @@ namespace TpWeb.Controllers
                 try
                 {
 
-
                     CegepControleur.Instance.AjouterDepartement(nomCegep, departementDTO);
-
                 }
                 catch (Exception e)
                 {
@@ -75,14 +78,51 @@ namespace TpWeb.Controllers
 
                 }
             }
-
-            
-
-
-
-
             
             return RedirectToAction("Index", "Departement", new {nomCegep=nomCegep});
+        }
+        /// <summary>
+        /// Méthode service qui permet d'afficher les informations d' un département dans un formulaire
+        /// </summary>
+        /// <param name="nomCegep"></param>
+        /// <param name="nomDepartement"></param>
+        /// <returns></returns>
+        [Route("Departement/FormulaireModifierDepartement")]
+        [HttpGet]
+        public IActionResult FormulaireModifierDepartement([FromQuery] string nomCegep, [FromQuery] string nomDepartement)
+        {
+            ViewBag.nomCegepChoix = nomCegep;
+            DepartementDTO departementDTO;
+            departementDTO = CegepControleur.Instance.ObtenirDepartement(nomCegep, nomDepartement);
+
+            return View(departementDTO);
+           
+        }
+        /// <summary>
+        /// Méthode service qui permet de modifier un département
+        /// </summary>
+        /// <param name="nomCegep"></param>
+        /// <param name="departementDTO"></param>
+        /// <returns></returns>
+        [Route("Departement/ModifierDepartement")]
+        [HttpPost]
+        public IActionResult ModifierDepartement([FromForm] string nomCegep, [FromForm] DepartementDTO departementDTO)
+        {
+            
+            try
+            {
+                ViewBag.nomCegepChoix = nomCegep;
+                CegepControleur.Instance.ModifierDepartement(nomCegep, departementDTO);
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("FormulaireModifierDepartement", "Departement", new { nomCegep = nomCegep, nomDepartement = departementDTO });
+            }
+            
+
+            return RedirectToAction("Index", "Departement",new {nomCegep=nomCegep});
+
         }
 
 

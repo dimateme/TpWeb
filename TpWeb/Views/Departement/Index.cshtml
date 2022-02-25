@@ -40,12 +40,13 @@
    
         
             
-    
+    <form asp-controller="" asp-action="">
     <table class="table table-bordered table-striped">
         <tbody><tr>
             <th>No</th>
             <th>Nom</th>
             <th>Description</th>
+            <th></th>
           
         </tr>
         @*Affichage de la liste des Départements..*@
@@ -54,8 +55,13 @@
                 <td>@departement.No</td>
                 <td>@departement.Nom</td>
                 <td>@departement.Description</td>
-                
-            </tr>}</tbody></table>
+                <td><input class="btn btn-primary" type="button" onclick="document.getElementById('nomDepartement').value='@departement.Nom';this.form.action='/Departement/FormulaireModifierDepartement';this.form.method='get';submit();" name="nomDepartement" value="Modifier"></td>
+            </tr>}</tbody>
+            <input type="hidden" id="nomDepartement" name="nomDepartement">
+            <input type="hidden"  name="nomCegep" value="@ViewBag.nomCegepChoix" />
+            </table>
+
+        </form>
 
         <br />
 

@@ -14,7 +14,8 @@ else
     <br>
     
        
-            
+       
+    <form asp-controller="" asp-action="">
         
     <table class="table table-bordered table-striped">
         <tbody><tr>
@@ -25,6 +26,7 @@ else
             <th>Code Postal</th>
             <th>Téléphone</th>
             <th>Courriel</th>
+            <th></th>
         </tr>@foreach (CegepDTO cegep in ViewBag.ListeCegeps)
         {<tr>
                 <td>@cegep.Nom</td>
@@ -34,7 +36,22 @@ else
                 <td>@cegep.CodePostal</td>
                 <td>@cegep.Telephone</td>
                 <td>@cegep.Courriel</td>
-            </tr>}</tbody></table>
+                <td style="width:20%">
+                    
+                    
+                    <input class="btn btn-primary" type="button" onclick="document.getElementById('nomCegep').value='@cegep.Nom';this.form.action='/Cegep/FormulaireModifierCegep';this.form.method='get';submit();" name="nomCegep" value="Modifier">
+                     
+
+
+                </td>
+            </tr>}
+            </tbody>
+            <input type="hidden" id="nomCegep" name="nomCegep">
+            </table>
+
+
+
+    </form>
     <br />
     <form asp-controller="Cegep" asp-action="AjouterCegep" method="post">
 
@@ -71,8 +88,9 @@ else
     </div>
 
     @*<input type="hidden"  asp-for="IdFilm" />*@
+    @*<input type="hidden"  name="nomCegep" value="Nom" />*@
 
-    <button type="submit" class="btn btn-primary">Ajouter</button>
+    <button type="submit" class="btn btn-success">Modifier</button>
     
     
 </form>

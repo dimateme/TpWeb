@@ -1,0 +1,36 @@
+﻿@using GestionCegepWeb.Models;
+@model CoursDTO
+@{
+    ViewData["Title"] = "FormulaireModifierCours";
+}
+<h1>Modifier un Cours</h1>
+<form asp-controller="Cours" asp-action="ModifierCours" method="post">
+
+    <div class="form-group">
+        <label asp-for ="No"></label>
+        <input asp-for ="No"   class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Nom" ></label>
+        <input asp-for="Nom"  class="form-control">
+    </div>
+
+    
+    <div class="form-group">
+        <label asp-for="Description" ></label>
+        <input asp-for="Description" class="form-control">
+    </div>
+   
+
+    <input type="hidden"  name="nomCegep" value="@ViewBag.nomCegepChoix" />
+    <input type="hidden"  name="nomDepartement" value="@ViewBag.nomDepartementChoix" />
+
+    <button type="submit" class="btn btn-primary">Modifier</button>
+    <button onclick="history.back();" type="button" class="btn btn-success">Annuler</button>
+    
+    
+</form>
+
+
+

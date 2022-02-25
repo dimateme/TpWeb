@@ -54,6 +54,7 @@
     @*Affichage de la liste des Cours..*@
     <h3>Liste des Cour(s) (@ViewBag.ListeCourts.Length Cour(s)) :</h3>
     <br>
+    <form asp-controller="" asp-action="">
     <table class="table table-bordered table-striped">
         <tbody><tr>
             <th>No</th>
@@ -66,12 +67,17 @@
                 <td>@cour.No</td>
                 <td>@cour.Nom</td>
                 <td>@cour.Description</td>
+                <td><input class="btn btn-primary" type="button" onclick="document.getElementById('nomCours').value='@cour.Nom';this.form.action='/Cours/FormulaireModifierCours';this.form.method='get';submit();" name="nomCours" value="Modifier"></td>
         </tr>}
             
         </tbody>
+        <input type="hidden" id="nomCours" name="nomCours">
+        <input type="hidden"  name="nomCegep" value="@ViewBag.nomCegepChoix" />
+        <input type="hidden"  name="nomDepartement" value="@ViewBag.nomDepartementChoix" />
         </table>
+        </form>
         <br />
-        <form asp-controller="Cours" asp-action="AjouterCours" method="post">
+<form asp-controller="Cours" asp-action="AjouterCours" method="post">
 
     <div class="form-group">
         <label asp-for ="No"></label>
